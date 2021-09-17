@@ -12,21 +12,19 @@ namespace Storefront.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class RecordLabels
+    public partial class AlbumStatus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RecordLabels()
+        public AlbumStatus()
         {
-            this.Albums = new HashSet<Albums>();
+            this.Albums = new HashSet<Album>();
         }
     
-        public int RecordLabelID { get; set; }
-        public string RecordLabelName { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public int AlbumStatusID { get; set; }
+        public string AlbumStatusName { get; set; }
+        public string Notes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Albums> Albums { get; set; }
+        public virtual ICollection<Album> Albums { get; set; }
     }
 }

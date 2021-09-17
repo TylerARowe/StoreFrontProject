@@ -201,7 +201,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StoreFrontModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Albums">
+        <EntityType Name="Album">
           <Key>
             <PropertyRef Name="AlbumID" />
           </Key>
@@ -221,7 +221,7 @@
           <NavigationProperty Name="Genre" Relationship="Self.FK_Albums_Genres" FromRole="Albums" ToRole="Genres" />
           <NavigationProperty Name="RecordLabel" Relationship="Self.FK_Albums_RecordLabels" FromRole="Albums" ToRole="RecordLabels" />
         </EntityType>
-        <EntityType Name="AlbumStatuses">
+        <EntityType Name="AlbumStatus">
           <Key>
             <PropertyRef Name="AlbumStatusID" />
           </Key>
@@ -230,7 +230,7 @@
           <Property Name="Notes" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Albums" Relationship="Self.FK_Albums_AlbumStatuses" FromRole="AlbumStatuses" ToRole="Albums" />
         </EntityType>
-        <EntityType Name="Artists">
+        <EntityType Name="Artist">
           <Key>
             <PropertyRef Name="ArtistID" />
           </Key>
@@ -243,7 +243,7 @@
           <Property Name="ArtistID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Albums" Relationship="Self.FK_Albums_Artists" FromRole="Artists" ToRole="Albums" />
         </EntityType>
-        <EntityType Name="Departments">
+        <EntityType Name="Department">
           <Key>
             <PropertyRef Name="DepartmentID" />
           </Key>
@@ -251,7 +251,7 @@
           <Property Name="DeparmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Departments" FromRole="Departments" ToRole="Employees" />
         </EntityType>
-        <EntityType Name="Employees">
+        <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmployeeID" />
           </Key>
@@ -270,7 +270,7 @@
           <NavigationProperty Name="Employees1" Relationship="Self.FK_Employees_Employees" FromRole="Employees" ToRole="Employees1" />
           <NavigationProperty Name="Employee1" Relationship="Self.FK_Employees_Employees" FromRole="Employees1" ToRole="Employees" />
         </EntityType>
-        <EntityType Name="Genres">
+        <EntityType Name="Genre">
           <Key>
             <PropertyRef Name="GenreID" />
           </Key>
@@ -278,7 +278,7 @@
           <Property Name="GenreName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Albums" Relationship="Self.FK_Albums_Genres" FromRole="Genres" ToRole="Albums" />
         </EntityType>
-        <EntityType Name="OtherProducts">
+        <EntityType Name="OtherProduct">
           <Key>
             <PropertyRef Name="ProdutID" />
           </Key>
@@ -287,7 +287,7 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
-        <EntityType Name="RecordLabels">
+        <EntityType Name="RecordLabel">
           <Key>
             <PropertyRef Name="RecordLabelID" />
           </Key>
@@ -299,8 +299,8 @@
           <NavigationProperty Name="Albums" Relationship="Self.FK_Albums_RecordLabels" FromRole="RecordLabels" ToRole="Albums" />
         </EntityType>
         <Association Name="FK_Albums_AlbumStatuses">
-          <End Role="AlbumStatuses" Type="StoreFrontModel.AlbumStatuses" Multiplicity="1" />
-          <End Role="Albums" Type="StoreFrontModel.Albums" Multiplicity="*" />
+          <End Role="AlbumStatuses" Type="Self.AlbumStatus" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Album" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AlbumStatuses">
               <PropertyRef Name="AlbumStatusID" />
@@ -311,8 +311,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Albums_Artists">
-          <End Role="Artists" Type="StoreFrontModel.Artists" Multiplicity="1" />
-          <End Role="Albums" Type="StoreFrontModel.Albums" Multiplicity="*" />
+          <End Role="Artists" Type="Self.Artist" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Album" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Artists">
               <PropertyRef Name="ArtistID" />
@@ -323,8 +323,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Albums_Genres">
-          <End Role="Genres" Type="StoreFrontModel.Genres" Multiplicity="1" />
-          <End Role="Albums" Type="StoreFrontModel.Albums" Multiplicity="*" />
+          <End Role="Genres" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Album" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Genres">
               <PropertyRef Name="GenreID" />
@@ -335,8 +335,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Albums_RecordLabels">
-          <End Role="RecordLabels" Type="StoreFrontModel.RecordLabels" Multiplicity="1" />
-          <End Role="Albums" Type="StoreFrontModel.Albums" Multiplicity="*" />
+          <End Role="RecordLabels" Type="Self.RecordLabel" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Album" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="RecordLabels">
               <PropertyRef Name="RecordLabelID" />
@@ -347,8 +347,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_Departments">
-          <End Role="Departments" Type="StoreFrontModel.Departments" Multiplicity="1" />
-          <End Role="Employees" Type="StoreFrontModel.Employees" Multiplicity="*" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Departments">
               <PropertyRef Name="DepartmentID" />
@@ -359,8 +359,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employees_Employees">
-          <End Role="Employees" Type="StoreFrontModel.Employees" Multiplicity="1" />
-          <End Role="Employees1" Type="StoreFrontModel.Employees" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Employees1" Type="Self.Employee" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="EmployeeID" />
@@ -370,38 +370,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="StoreFrontEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Albums1" EntityType="StoreFrontModel.Albums" />
-          <EntitySet Name="AlbumStatuses" EntityType="StoreFrontModel.AlbumStatuses" />
-          <EntitySet Name="Artists1" EntityType="StoreFrontModel.Artists" />
-          <EntitySet Name="Departments1" EntityType="StoreFrontModel.Departments" />
-          <EntitySet Name="Employees1" EntityType="StoreFrontModel.Employees" />
-          <EntitySet Name="Genres1" EntityType="StoreFrontModel.Genres" />
-          <EntitySet Name="OtherProducts1" EntityType="StoreFrontModel.OtherProducts" />
-          <EntitySet Name="RecordLabels1" EntityType="StoreFrontModel.RecordLabels" />
+        <EntityContainer Name="StoreFrontDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="AlbumStatuses" EntityType="Self.AlbumStatus" />
+          <EntitySet Name="Artists" EntityType="Self.Artist" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="OtherProducts" EntityType="Self.OtherProduct" />
+          <EntitySet Name="RecordLabels" EntityType="Self.RecordLabel" />
           <AssociationSet Name="FK_Albums_AlbumStatuses" Association="Self.FK_Albums_AlbumStatuses">
             <End Role="AlbumStatuses" EntitySet="AlbumStatuses" />
-            <End Role="Albums" EntitySet="Albums1" />
+            <End Role="Albums" EntitySet="Albums" />
           </AssociationSet>
           <AssociationSet Name="FK_Albums_Artists" Association="Self.FK_Albums_Artists">
-            <End Role="Artists" EntitySet="Artists1" />
-            <End Role="Albums" EntitySet="Albums1" />
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Albums" EntitySet="Albums" />
           </AssociationSet>
           <AssociationSet Name="FK_Albums_Genres" Association="Self.FK_Albums_Genres">
-            <End Role="Genres" EntitySet="Genres1" />
-            <End Role="Albums" EntitySet="Albums1" />
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Albums" EntitySet="Albums" />
           </AssociationSet>
           <AssociationSet Name="FK_Albums_RecordLabels" Association="Self.FK_Albums_RecordLabels">
-            <End Role="RecordLabels" EntitySet="RecordLabels1" />
-            <End Role="Albums" EntitySet="Albums1" />
+            <End Role="RecordLabels" EntitySet="RecordLabels" />
+            <End Role="Albums" EntitySet="Albums" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Departments" Association="Self.FK_Employees_Departments">
-            <End Role="Departments" EntitySet="Departments1" />
-            <End Role="Employees" EntitySet="Employees1" />
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
-            <End Role="Employees" EntitySet="Employees1" />
-            <End Role="Employees1" EntitySet="Employees1" />
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employees1" EntitySet="Employees" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -409,9 +409,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="StoreFrontModelStoreContainer" CdmEntityContainer="StoreFrontEntities">
-          <EntitySetMapping Name="Albums1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Albums">
+        <EntityContainerMapping StorageEntityContainer="StoreFrontModelStoreContainer" CdmEntityContainer="StoreFrontDB">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="StoreFrontModel.Album">
               <MappingFragment StoreEntitySet="Albums">
                 <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
                 <ScalarProperty Name="AlbumTitle" ColumnName="AlbumTitle" />
@@ -428,7 +428,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AlbumStatuses">
-            <EntityTypeMapping TypeName="StoreFrontModel.AlbumStatuses">
+            <EntityTypeMapping TypeName="StoreFrontModel.AlbumStatus">
               <MappingFragment StoreEntitySet="AlbumStatuses">
                 <ScalarProperty Name="AlbumStatusID" ColumnName="AlbumStatusID" />
                 <ScalarProperty Name="AlbumStatusName" ColumnName="AlbumStatusName" />
@@ -436,8 +436,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Artists1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Artists">
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="StoreFrontModel.Artist">
               <MappingFragment StoreEntitySet="Artists">
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
@@ -449,16 +449,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Departments1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Departments">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="StoreFrontModel.Department">
               <MappingFragment StoreEntitySet="Departments">
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="DeparmentName" ColumnName="DeparmentName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Employees1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Employees">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="StoreFrontModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
                 <ScalarProperty Name="DirectReportID" ColumnName="DirectReportID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -474,16 +474,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Genres1">
-            <EntityTypeMapping TypeName="StoreFrontModel.Genres">
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="StoreFrontModel.Genre">
               <MappingFragment StoreEntitySet="Genres">
                 <ScalarProperty Name="GenreID" ColumnName="GenreID" />
                 <ScalarProperty Name="GenreName" ColumnName="GenreName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OtherProducts1">
-            <EntityTypeMapping TypeName="StoreFrontModel.OtherProducts">
+          <EntitySetMapping Name="OtherProducts">
+            <EntityTypeMapping TypeName="StoreFrontModel.OtherProduct">
               <MappingFragment StoreEntitySet="OtherProducts">
                 <ScalarProperty Name="ProdutID" ColumnName="ProdutID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
@@ -492,8 +492,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RecordLabels1">
-            <EntityTypeMapping TypeName="StoreFrontModel.RecordLabels">
+          <EntitySetMapping Name="RecordLabels">
+            <EntityTypeMapping TypeName="StoreFrontModel.RecordLabel">
               <MappingFragment StoreEntitySet="RecordLabels">
                 <ScalarProperty Name="RecordLabelID" ColumnName="RecordLabelID" />
                 <ScalarProperty Name="RecordLabelName" ColumnName="RecordLabelName" />

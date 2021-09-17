@@ -12,18 +12,23 @@ namespace Storefront.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Genres
+    public partial class Artist
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Genres()
+        public Artist()
         {
-            this.Albums = new HashSet<Albums>();
+            this.Albums = new HashSet<Album>();
         }
     
-        public int GenreID { get; set; }
-        public string GenreName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
+        public string Country { get; set; }
+        public string Gender { get; set; }
+        public int ArtistID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Albums> Albums { get; set; }
+        public virtual ICollection<Album> Albums { get; set; }
     }
 }

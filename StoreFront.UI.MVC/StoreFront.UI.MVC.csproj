@@ -168,19 +168,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
+    <Compile Include="Models\CartItemViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ImageUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\styles.css" />
@@ -265,9 +269,16 @@
     <Content Include="_Archive\OriginalContent\bootstrap-theme.min.css.map" />
     <Content Include="_Archive\OriginalContent\bootstrap.css.map" />
     <Content Include="_Archive\OriginalContent\bootstrap.min.css.map" />
+    <Content Include="Views\Albums\Create.cshtml" />
+    <Content Include="Views\Albums\Delete.cshtml" />
+    <Content Include="Views\Albums\Details.cshtml" />
+    <Content Include="Views\Albums\Edit.cshtml" />
+    <Content Include="Views\Albums\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\imgstore\albums\" />
+    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -277,6 +288,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Storefront.DATA.EF\Storefront.DATA.EF.csproj">
+      <Project>{d8942ac1-f1da-45f6-885e-083582e3c2b3}</Project>
+      <Name>Storefront.DATA.EF</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

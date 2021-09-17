@@ -13,10 +13,10 @@ namespace Storefront.DATA.EF
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class StoreFrontEntities : DbContext
+    public partial class StoreFrontDB : DbContext
     {
-        public StoreFrontEntities()
-            : base("name=StoreFrontEntities")
+        public StoreFrontDB()
+            : base("name=StoreFrontDB")
         {
         }
     
@@ -25,13 +25,13 @@ namespace Storefront.DATA.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Albums> Albums1 { get; set; }
-        public virtual DbSet<AlbumStatuses> AlbumStatuses { get; set; }
-        public virtual DbSet<Artists> Artists1 { get; set; }
-        public virtual DbSet<Departments> Departments1 { get; set; }
-        public virtual DbSet<Employees> Employees1 { get; set; }
-        public virtual DbSet<Genres> Genres1 { get; set; }
-        public virtual DbSet<OtherProducts> OtherProducts1 { get; set; }
-        public virtual DbSet<RecordLabels> RecordLabels1 { get; set; }
+        public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<AlbumStatus> AlbumStatuses { get; set; }
+        public virtual DbSet<Artist> Artists { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Genre> Genres { get; set; }
+        public virtual DbSet<OtherProduct> OtherProducts { get; set; }
+        public virtual DbSet<RecordLabel> RecordLabels { get; set; }
     }
 }

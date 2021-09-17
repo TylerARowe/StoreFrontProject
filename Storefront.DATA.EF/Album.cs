@@ -12,7 +12,7 @@ namespace Storefront.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Albums
+    public partial class Album
     {
         public int AlbumID { get; set; }
         public string AlbumTitle { get; set; }
@@ -26,9 +26,9 @@ namespace Storefront.DATA.EF
         public int AlbumStatusID { get; set; }
         public int ArtistID { get; set; }
     
-        public virtual AlbumStatuses AlbumStatus { get; set; }
-        public virtual Artists Artist { get; set; }
-        public virtual Genres Genre { get; set; }
-        public virtual RecordLabels RecordLabel { get; set; }
+        public virtual AlbumStatus AlbumStatus { get; set; }
+        public virtual Artist Artist { get; set; }
+        public virtual Genre Genre { get; set; }
+        public virtual RecordLabel RecordLabel { get; set; }
     }
 }

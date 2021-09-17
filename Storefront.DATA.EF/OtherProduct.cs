@@ -12,7 +12,7 @@ namespace Storefront.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class OtherProducts
+    public partial class OtherProduct
     {
         public int ProdutID { get; set; }
         public string ProductName { get; set; }

@@ -12,7 +12,7 @@ namespace Storefront.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Employees
+    public partial class Employee
     {
         public int DirectReportID { get; set; }
         public string FirstName { get; set; }
@@ -26,8 +26,8 @@ namespace Storefront.DATA.EF
         public string Country { get; set; }
         public int DepartmentID { get; set; }
     
-        public virtual Departments Department { get; set; }
-        public virtual Employees Employees1 { get; set; }
-        public virtual Employees Employee1 { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual Employee Employees1 { get; set; }
+        public virtual Employee Employee1 { get; set; }
     }
 }
