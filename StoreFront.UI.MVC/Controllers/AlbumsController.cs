@@ -80,7 +80,7 @@ namespace StoreFront.UI.MVC.Controllers
                         //what we need: filepath, image file, maximum image size (full size), maximum thumb size (thumbnail)
 
                         //file path
-                        string savePath = Server.MapPath("~/Content/imgstore/books/");
+                        string savePath = Server.MapPath("~/Content/imgstore/albums/");
 
                         //image file
                         Image convertedImage = Image.FromStream(albumCover.InputStream);
@@ -143,10 +143,73 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,AlbumTitle,Description,GenreID,Price,UnitsSold,PublishDate,RecordLabelID,AlbumCover,AlbumStatusID,ArtistID")] Album album)
+        public ActionResult Edit([Bind(Include = "AlbumID,AlbumTitle,Description,GenreID,Price,UnitsSold,PublishDate,RecordLabelID,AlbumCover,AlbumStatusID,ArtistID")] Album album, HttpPostedFileBase albumCover)
         {
             if (ModelState.IsValid)
             {
+
+                #region File Upload w/ Utility
+                //check to see if a new file has been uploaded.  If not, the HiddenFor() from the View will maintain
+                //the original value
+
+                string file = "";
+
+                if (albumCover != null)
+                {
+                    //retrieve the name of the file so we can check it's extension
+                    file = albumCover.FileName;
+
+                    //retrieve the extension
+
+                    //file = myImage.png
+                    //       012345678910
+                    //file.LastIndexOf("."); -> 7
+                    //file.Substring(7); -> .png
+
+
+                    //string post = "Just starting this trend now because #jeffrules #allthetime"
+                    //post.Substring(post.LastIndexOf("#"));
+
+                    string ext = file.Substring(file.LastIndexOf("."));
+
+                    string[] goodExts = { ".jpg", ".jpeg", ".gif", ".png" };
+
+                    if (goodExts.Contains(ext))
+                    {
+                        //create a new file name (using a GUID so it will be unique)
+                        file = Guid.NewGuid() + ext;
+
+                        #region Resize Image
+                        //params for the ResizeImage() method
+                        string savePath = Server.MapPath("~/Content/imgstore/albums/");
+
+                        Image convertedImage = Image.FromStream(albumCover.InputStream);
+
+                        int maxImageSize = 500;
+
+                        int maxThumbSize = 100;
+
+                        //Call the Image service method to resize our image
+                        //ResizeImage() will save 2 resized copies of our original image -- 1 full size, and 1 thumbnail
+                        ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+                        #endregion
+
+                        #region Delete the old image
+                        if (album.AlbumCover != null && album.AlbumCover != "NoImage.png")
+                        {
+                            string path = Server.MapPath("~/Content/imgstore/albums/");
+                            ImageUtility.Delete(path, album.AlbumCover);
+                        }
+                        #endregion
+
+                        //Assign our new filename to the album.AlbumCover we are currently editing
+                        album.AlbumCover = file;
+
+                    }
+
+                }
+                #endregion
+
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
