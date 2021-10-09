@@ -1,0 +1,89 @@
+﻿@*@model IEnumerable<Storefront.DATA.EF.Album>*@
+@model PagedList.IPagedList<Storefront.DATA.EF.Album>
+@using PagedList
+
+@{
+    ViewBag.Title = "AlbumsMVCPaging";
+}
+
+<h2 id="albums">AlbumsMVCPaging</h2>
+
+
+@*
+    Steps to implement MVC Paged List
+    1) Create your Action and View
+    2) Install the NuGet package -- Package Manager Console -> Type 'install-package pagedlist.mvc' -> hit enter
+    3) Add <link> to _Layout for PagedList.css
+    4) Add using statements for PagedList (Controller) & PagedList.Mvc (Controller & View)
+    5) Code controller logic (param for page, int for pageSize, and sort collection then cast to PagedList())
+    6) Update model declaration in the View (from IEnumerable to PagedList.IPagedList)
+    7) Add Pager Code to the View (Html.PagedListPager)
+    8) Update <th> tags -> add FirstOrDefault()
+*@
+
+<div class="row">
+    @using (Html.BeginForm("AlbumsMVCPaging", "Filters", FormMethod.Get))
+    {
+        <p>
+            Search by Title: @Html.TextBox("SearchString", ViewBag.SearchString as string)
+            <input type="submit" value="Search" />
+        </p>
+    }
+</div>
+
+@* PAGER CODE: add this wherever you want the page buttons to show up *@
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@* PAGER CODE: add this whenver you want the page buttons to show up *@
+
+@* PagedListPager WITH search *@
+@*@Html.PagedListPager(Model, Page => Url.Action("AlbumsMVCPaging", new { page, searchString = ViewBag.SearchString }) + "#albums")*@
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().AlbumTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().AlbumCover)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Genre.GenreID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().RecordLabel.RecordLabelName)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AlbumTitle)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            <td>
+                @*Html.DisplayFor(modelItem => item.BookImage)*@
+                <img src="~/Content/imgstore/albums/t_@item.AlbumCover" />
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre.GenreName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecordLabel.RecordLabelName)
+            </td>
+
+        </tr>
+    }
+
+
+</table>

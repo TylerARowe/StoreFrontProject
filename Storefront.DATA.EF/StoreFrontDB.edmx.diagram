@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="StoreFrontModel.Employee" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreFrontModel.Genre" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreFrontModel.OtherProduct" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreFrontModel.RecordLabel" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreFrontModel.RecordLabel" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <AssociationConnector Association="StoreFrontModel.FK_Albums_AlbumStatuses" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.FK_Albums_Artists" ManuallyRouted="false" />
         <AssociationConnector Association="StoreFrontModel.FK_Albums_Genres" ManuallyRouted="false" />

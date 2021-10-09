@@ -33,7 +33,7 @@
             @Html.DisplayNameFor(model => model.AlbumStatus.AlbumStatusName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Artist)
+            @Html.DisplayNameFor(model => model.Artist.FirstName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Genre.GenreName)
@@ -62,8 +62,7 @@
             @Html.DisplayFor(modelItem => item.PublishDate)
         </td>
         <td>
-            @*@Html.DisplayFor(modelItem => item.AlbumCover)*@
-            <img src="~/Content/imgstore/albums/t_@item.AlbumCover" alt="Album cover" title="@item.AlbumTitle" />
+            @Html.DisplayFor(modelItem => item.AlbumCover)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AlbumStatus.AlbumStatusName)
@@ -78,15 +77,9 @@
             @Html.DisplayFor(modelItem => item.RecordLabel.RecordLabelName)
         </td>
         <td>
-            <a href="@Url.Action("Edit", "Albums", new { id=item.AlbumID })">
-                <i class="fa fa-pencil-square-o action-icons" aria-hidden="true"></i>
-            </a>
-            <a href="@Url.Action("Details", "Albums", new { id = item.AlbumID })">
-                <i class="fa fa-info-circle action-icons" aria-hidden="true"></i>
-            </a>
-            <a href="@Url.Action("Delete", "Albums", new { id = item.AlbumID })">
-                <i class="fa fa-trash-o action-icons" aria-hidden="true"></i>
-            </a>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AlbumID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AlbumID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AlbumID })
         </td>
     </tr>
 }

@@ -1,0 +1,45 @@
+﻿body {
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 24px;
+}
+
+#logout{
+    font-size: 24px;
+    padding-right: 18px;
+    padding-bottom: 2px;
+}
+
+#welcomemsg{
+    float: left!important;
+}
+
+#newacc{
+    align-content: center;
+}
+
+#loginextras{
+    padding-left: 2em;
+}
+
+#albumbtn{
+    float: left;
+    font-size: 24px;
+}
+#artistbtn {
+    float: left;
+    font-size: 24px;
+}
+#recordlblbtn{
+    float: left;
+    font-size: 24px;
+}
+
+#loginbtn {
+    float: inherit;
+    font-size: 24px;
+}
+
+#registerbtn {
+    float: right;
+    font-size: 24px;
+}
