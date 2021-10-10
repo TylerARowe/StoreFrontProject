@@ -15,13 +15,6 @@ namespace StoreFront.UI.MVC.Controllers
     {
         private StoreFrontDB db = new StoreFrontDB();
 
-        //Jquery datatables client side ezmple, create a view with Lsit scaffolding for Books
-        public ActionResult Clientside()
-        {
-            var albums = db.Albums.Include(a => a.AlbumTitle).Include(a => a.AlbumStatus).Include(a => a.Genre).Include(a => a.RecordLabel);
-            return View(albums.ToList());
-        }
-
         public ActionResult ArtistsQS(string searchFilter)
         {
             //If its the firs time viewing the page or the user just hits search without entering anything, return all artists.
@@ -42,7 +35,26 @@ namespace StoreFront.UI.MVC.Controllers
            
         }
 
-        //Server side paging example with PageList.MVC (NuGet)
+        public ActionResult AlbumsQS(string searchFilter)
+        {
+            //If its the firs time viewing the page or the user just hits search without entering anything, return all artists.
+            if (String.IsNullOrEmpty(searchFilter))
+            {
+                var albums = db.Albums;
+                return View(albums.ToList());
+            }
+            else
+            {
+                //this is written in linq method syntax
+                var searchResults = db.Albums.Where(x => x.AlbumTitle.ToLower().Contains(searchFilter.ToLower()));
+
+                return View(searchResults.ToList());
+
+            }
+
+        }
+
+        //Server side paging example with PageList.MVC (NuGet) (this does not work the correct way right now)
         public ActionResult AlbumsMVCPaging(string searchString, int page = 1)//default to first page if nothing is passed to the param
         {
             //Variable for how many records to show for page size, this variable can be changed based on how much I want to show.

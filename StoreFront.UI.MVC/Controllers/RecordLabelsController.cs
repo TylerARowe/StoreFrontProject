@@ -36,6 +36,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: RecordLabels/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +47,7 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "RecordLabelID,RecordLabelName,City,State,IsActive")] RecordLabel recordLabel)
         {
             if (ModelState.IsValid)
@@ -59,6 +61,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: RecordLabels/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +81,7 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "RecordLabelID,RecordLabelName,City,State,IsActive")] RecordLabel recordLabel)
         {
             if (ModelState.IsValid)
@@ -90,6 +94,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: RecordLabels/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +112,7 @@ namespace StoreFront.UI.MVC.Controllers
         // POST: RecordLabels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             RecordLabel recordLabel = db.RecordLabels.Find(id);

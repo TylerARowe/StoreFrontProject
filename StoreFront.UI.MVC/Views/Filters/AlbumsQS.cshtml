@@ -1,0 +1,92 @@
+﻿@model IEnumerable < Storefront.DATA.EF.Album>
+
+@{
+    ViewBag.Title = "Albums";
+}
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+@* Here I am using what we did in class to build a basic form allowing a user to search for an artists first/lastname. The search keywords
+    will be passed by the form to the controller in a querystring.*@
+
+<div class="row panel panel-primary">
+    <form method="get" action="~/Filters/AlbumsQS" class="form-horizontal pull-left">
+        <div class="form-group" style="padding-top: 1em;">
+            <div class="col-xs-offset-1 col-xs-11 col-sm-2">
+                <label for="searchFilter">Search by Album Name</label>
+            </div>
+            <div class="col-xs-1 col-xs-11 col-sm-5">
+                <input type="text" name="searchFilter" />
+            </div>
+            <div class="col-xs-offset-1 col-xs-11 col-sm-2">
+                <input type="submit" value="Go!" class="btn btn-primary" />
+                @Html.ActionLink("Reset", "AlbumsQS", "Filters", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@if (Model.Count() > 0)
+{
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitsSold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumCover)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.AlbumTitle)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Description)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Price)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.UnitsSold)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.PublishDate)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.AlbumCover)
+            </th>
+            @*<th></th>*@
+        </tr>
+    }
+
+</table>
+}
+
+else
+{
+    <p>
+        Sorry, no results found. Please reset or try searching for something else.
+    </p>
+}
+

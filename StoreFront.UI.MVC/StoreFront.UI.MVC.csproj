@@ -308,6 +308,7 @@
     <Content Include="Views\RecordLabels\Index.cshtml" />
     <Content Include="Views\Filters\ArtistsQS.cshtml" />
     <Content Include="Views\Filters\AlbumsMVCPaging.cshtml" />
+    <Content Include="Views\Filters\AlbumsQS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

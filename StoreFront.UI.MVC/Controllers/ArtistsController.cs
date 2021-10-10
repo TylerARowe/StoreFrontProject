@@ -36,6 +36,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: Artists/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +47,7 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "FirstName,LastName,State,ZipCode,Country,Gender,ArtistID")] Artist artist)
         {
             if (ModelState.IsValid)
@@ -59,6 +61,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: Artists/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +81,7 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "FirstName,LastName,State,ZipCode,Country,Gender,ArtistID")] Artist artist)
         {
             if (ModelState.IsValid)
@@ -90,6 +94,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: Artists/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +112,7 @@ namespace StoreFront.UI.MVC.Controllers
         // POST: Artists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Artist artist = db.Artists.Find(id);

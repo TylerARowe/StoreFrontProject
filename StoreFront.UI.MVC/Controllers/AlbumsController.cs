@@ -37,6 +37,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: Albums/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.AlbumStatusID = new SelectList(db.AlbumStatuses, "AlbumStatusID", "AlbumStatusName");
@@ -51,6 +52,7 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "AlbumID,AlbumTitle,Description,GenreID,Price,UnitsSold,PublishDate,RecordLabelID,AlbumCover,AlbumStatusID,ArtistID")] Album album)
         {
             if (ModelState.IsValid)
@@ -68,6 +70,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: Albums/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -91,6 +94,7 @@ namespace StoreFront.UI.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "AlbumID,AlbumTitle,Description,GenreID,Price,UnitsSold,PublishDate,RecordLabelID,AlbumCover,AlbumStatusID,ArtistID")] Album album)
         {
             if (ModelState.IsValid)
@@ -107,6 +111,7 @@ namespace StoreFront.UI.MVC.Controllers
         }
 
         // GET: Albums/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -124,6 +129,7 @@ namespace StoreFront.UI.MVC.Controllers
         // POST: Albums/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             Album album = db.Albums.Find(id);
