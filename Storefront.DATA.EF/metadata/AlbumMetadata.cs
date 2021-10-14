@@ -35,7 +35,8 @@ namespace Storefront.DATA.EF
 
         public Nullable<int> UnitsSold { get; set; }
 
-
+        [Display(Name = "Publish Date")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public Nullable<System.DateTime> PublishDate { get; set; }
 
         [Required]
@@ -43,6 +44,7 @@ namespace Storefront.DATA.EF
         public int RecordLabelID { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Album Cover")]
         public string AlbumCover { get; set; }
 
         [Required]

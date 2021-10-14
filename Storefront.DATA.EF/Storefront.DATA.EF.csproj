@@ -69,6 +69,10 @@
       <DependentUpon>StoreFrontDB.tt</DependentUpon>
     </Compile>
     <Compile Include="metadata\AlbumMetadata.cs" />
+    <Compile Include="metadata\ArtistMetadata.cs" />
+    <Compile Include="metadata\EmployeeMetadata.cs" />
+    <Compile Include="metadata\OtherProductsMetadata.cs" />
+    <Compile Include="metadata\RecordLabelMetadata.cs" />
     <Compile Include="OtherProduct.cs">
       <DependentUpon>StoreFrontDB.tt</DependentUpon>
     </Compile>
